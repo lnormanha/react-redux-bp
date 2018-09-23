@@ -1,7 +1,19 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import createSagaMiddleware from "redux-saga";
 
-export default rootReducer => {
-  const store = createStore(rootReducer);
+export default (rootReducer, rootSaga) => {
+  const middlewares = [];
+  const enhancers = [];
 
-  return store;
+  const sagaMonitor = null;
+  const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
+  middlewares.push(sagaMiddleware);
+
+  enhancers.push(applyMiddleware(...middlewares));
+
+  const store = createStore(rootReducer, compose(...enhancers));
+
+  let sagasManager = sagaMiddleware.run(rootSaga);
+
+  return { store, sagasManager, sagaMiddleware };
 };
