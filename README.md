@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-##Introduction
+## Introduction
 
 The template of this is project is based on Ignite 2 for React-Native with some modifications, which I use to develop mobile applications.
 
